@@ -21,21 +21,37 @@ enum Color
     LIGHT_WHITE,
 };
 
+struct Obj
+{
+    int x;
+    int y;
+    Color color;
+    const char* shape;
+};
+
 void SetColor(int color);
 void SetPosition(int x, int y);
 void HideCursor();
 
+
+
 int main()
 {
+    Obj player;
+    player.x = 10;
+    player.y = 10;
+    player.color = LIGHT_WHITE;
+    player.shape = "бс";
+
     HideCursor();
 
     while (true)
     {
         system("cls");
 
-        SetColor(LIGHT_WHITE);
-        SetPosition(10, 10);
-        printf("Hello world");
+        SetPosition(player.x, player.y);
+        SetColor(player.color);
+        printf(player.shape);
 
         Sleep(20);
     }

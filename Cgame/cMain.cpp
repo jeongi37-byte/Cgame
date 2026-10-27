@@ -21,19 +21,19 @@ enum Color
     LIGHT_WHITE,
 };
 
-struct Obj
+typedef struct Obj
 {
     int x;
     int y;
     Color color;
     const char* shape;
-};
+}Player;
 
 void SetColor(int color);
 void SetPosition(int x, int y);
 void HideCursor();
 
-Obj* player = nullptr;
+Player* player = nullptr;
 
 void Init();
 void Update();
@@ -63,7 +63,7 @@ int main()
 void Init()
 {
 
-    player = (Obj*)malloc(sizeof(Obj));
+    player = (Player*)malloc(sizeof(Player));
     player->x = 10;
     player->y = 10;
     player->color = LIGHT_WHITE;

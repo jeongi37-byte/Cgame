@@ -33,15 +33,15 @@ void SetColor(int color);
 void SetPosition(int x, int y);
 void HideCursor();
 
+Obj* player = nullptr;
 
+void Init();
+void Update();
+void Clear();
 
 int main()
 {
-    Obj player;
-    player.x = 10;
-    player.y = 10;
-    player.color = LIGHT_WHITE;
-    player.shape = "бс";
+    Init();
 
     HideCursor();
 
@@ -49,32 +49,59 @@ int main()
     {
         system("cls");
 
-        if (GetAsyncKeyState(VK_LEFT))
-        {
-            player.x--;
-        }
-
-        if (GetAsyncKeyState(VK_RIGHT))
-        {
-            player.x++;
-        }
-        if (GetAsyncKeyState(VK_UP))
-        {
-            player.y--;
-        }
-        if (GetAsyncKeyState(VK_DOWN))
-        {
-            player.y++;
-        }
-
-        SetPosition(player.x, player.y);
-        SetColor(player.color);
-        printf(player.shape);
+        Update();
 
         Sleep(20);
     }
 
+    Clear();
+    
     return 0;
+}
+
+
+void Init()
+{
+
+    player = (Obj*)malloc(sizeof(Obj));
+    player->x = 10;
+    player->y = 10;
+    player->color = LIGHT_WHITE;
+    player->shape = "бс";
+}
+
+void Update()
+{
+    if (GetAsyncKeyState(VK_LEFT))
+    {
+        player->x--;
+    }
+
+    if (GetAsyncKeyState(VK_RIGHT))
+    {
+        player->x++;
+    }
+    if (GetAsyncKeyState(VK_UP))
+    {
+        player->y--;
+    }
+    if (GetAsyncKeyState(VK_DOWN))
+    {
+        player->y++;
+    }
+
+    SetPosition(player->x, player->y);
+    SetColor(player->color);
+    printf(player->shape);
+}
+
+void Clear()
+{
+    if (player != nullptr)
+    {
+        free(player);
+        player = nullptr;
+    }
 }
 
 

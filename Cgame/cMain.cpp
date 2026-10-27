@@ -49,6 +49,24 @@ int main()
     {
         system("cls");
 
+        if (GetAsyncKeyState(VK_LEFT))
+        {
+            player.x--;
+        }
+
+        if (GetAsyncKeyState(VK_RIGHT))
+        {
+            player.x++;
+        }
+        if (GetAsyncKeyState(VK_UP))
+        {
+            player.y--;
+        }
+        if (GetAsyncKeyState(VK_DOWN))
+        {
+            player.y++;
+        }
+
         SetPosition(player.x, player.y);
         SetColor(player.color);
         printf(player.shape);

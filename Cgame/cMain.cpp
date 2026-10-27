@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <Windows.h>
 
+#define ENEMY_COUNT 10
+
 enum Color
 {
     //BLACK,
@@ -27,13 +29,15 @@ typedef struct Obj
     int y;
     Color color;
     const char* shape;
-}Player;
+}Player, Enemy;
 
 void SetColor(int color);
 void SetPosition(int x, int y);
 void HideCursor();
 
 Player* player = nullptr;
+Enemy* enemies[ENEMY_COUNT] = {};
+
 
 void Init();
 void Update();
@@ -68,6 +72,16 @@ void Init()
     player->y = 10;
     player->color = LIGHT_WHITE;
     player->shape = "бс";
+
+    for (int i = 0; i < ENEMY_COUNT; i++)
+    {
+        enemies[i] = (Enemy*)malloc(sizeof(Enemy));
+        enemies[i]->x = rand() % 35;
+        enemies[i]->y = rand() % 35;
+        enemies[i]->color = RED;
+        enemies[i]->shape = "б▄";
+
+    }
 }
 
 void Update()
@@ -93,6 +107,13 @@ void Update()
     SetPosition(player->x, player->y);
     SetColor(player->color);
     printf(player->shape);
+
+    for (int i = 0; i < ENEMY_COUNT; i++)
+    {
+        SetPosition(enemies[i]->x, enemies[i]->y);
+        SetColor(enemies[i]->color);
+        printf(enemies[i]->shape);
+    }
 }
 
 void Clear()
@@ -101,6 +122,12 @@ void Clear()
     {
         free(player);
         player = nullptr;
+    }
+
+    for (int i = 0; i < ENEMY_COUNT; i++)
+    {
+        free(enemies[i]);
+        enemies[i] = nullptr;
     }
 }
 

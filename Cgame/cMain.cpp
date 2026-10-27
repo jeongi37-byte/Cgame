@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <Windows.h>
 
-#define ENEMY_COUNT 10
+#define ENEMY_COUNT 20
 
 enum Color
 {
